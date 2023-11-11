@@ -8,3 +8,7 @@ func _input(event):
 			self.apply_impulse(Vector2(0, -350))
 			# self.set_angular_velocity(-3)
 			$AnimatedSprite2D.play("fly")
+
+func _on_area_2d_body_entered(body):
+	if body.name == "Floor":
+		self.queue_free()
