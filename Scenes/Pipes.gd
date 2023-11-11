@@ -1,10 +1,11 @@
 extends TileMap
 
 var pipe
-var initial_position = 10
+var initial_position = 8
 var speed = 60
 
 func _ready():
+	print("Pipe Instantiated...")
 	var randRangeTop = randi_range(1, 15)
 	
 	# Set Top Pipe
@@ -24,8 +25,13 @@ func _ready():
 
 	# Build Pipe tube
 	for i in 15:
-			set_cell(0, Vector2i(initial_position, randRangeTop + 8 + i), 0, Vector2i(0, 2), 0)
+		set_cell(0, Vector2i(initial_position, randRangeTop + 8 + i), 0, Vector2i(0, 2), 0)
 
 func _process(delta):
 	self.position.x -= speed * delta
+	#pass
 
+func _on_area_2d_body_entered(body):
+	if body.name == "Bird":
+		print(body)
+		Global.points += 1

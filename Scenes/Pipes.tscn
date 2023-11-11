@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cww85g4wsjmuf"]
+[gd_scene load_steps=6 format=3 uid="uid://cww85g4wsjmuf"]
 
 [ext_resource type="Texture2D" uid="uid://c4rdot1epugfl" path="res://Assets/Tileset/Style 1/PipeStyle1.png" id="1_71n3h"]
 [ext_resource type="Script" path="res://Scenes/Pipes.gd" id="2_vkhda"]
@@ -172,7 +172,18 @@ tile_size = Vector2i(32, 16)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_3ejx3")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kt2gt"]
+size = Vector2(1, 386)
+
 [node name="Pipe" type="TileMap"]
 tile_set = SubResource("TileSet_dgyqc")
 format = 2
 script = ExtResource("2_vkhda")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(291, 191)
+shape = SubResource("RectangleShape2D_kt2gt")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
