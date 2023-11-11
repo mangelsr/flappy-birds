@@ -10,5 +10,5 @@ func _input(event):
 			$AnimatedSprite2D.play("fly")
 
 func _on_area_2d_body_entered(body):
-	if body.name == "Floor":
+	if body.name == "Floor" or body.name == "Pipes":
 		self.queue_free()
