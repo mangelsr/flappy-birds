@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cv1f2tllhri80"]
+[gd_scene load_steps=16 format=3 uid="uid://cv1f2tllhri80"]
 
 [ext_resource type="Script" path="res://Scenes/Bird.gd" id="1_2hh1a"]
 [ext_resource type="Texture2D" uid="uid://b0xituc625j1n" path="res://Assets/Player/bird2.png" id="1_askr7"]
@@ -54,9 +54,6 @@ script/source = "extends ParallaxBackground
 
 @export var scrollSpeed = 10
 @onready var pipe = preload(\"res://Scenes/Pipes.tscn\")
-
-func _ready():
-	spawn()
 
 func _process(delta):
 	self.scroll_base_offset.x -= scrollSpeed * delta
@@ -392,6 +389,13 @@ texture = ExtResource("4_nyb8r")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_tenvx")
 
+[sub_resource type="GDScript" id="GDScript_rrw0h"]
+script/source = "extends Label
+
+func _process(delta):
+	self.text = str(Global.points)
+"
+
 [node name="World" type="Node2D"]
 
 [node name="Bird" type="RigidBody2D" parent="."]
@@ -436,6 +440,13 @@ metadata/_edit_lock_ = true
 [node name="Timer" type="Timer" parent="ParallaxBackground"]
 wait_time = 3.0
 autostart = true
+
+[node name="Label" type="Label" parent="."]
+offset_right = 216.0
+offset_bottom = 26.0
+horizontal_alignment = 1
+script = SubResource("GDScript_rrw0h")
+metadata/_edit_lock_ = true
 
 [connection signal="body_entered" from="Bird/Area2D" to="Bird" method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="ParallaxBackground/Timer" to="ParallaxBackground" method="_on_timer_timeout"]
